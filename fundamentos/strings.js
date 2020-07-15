@@ -12,7 +12,7 @@ console.log("Meu nome é " + meuNome + "!")
 
 console.log("2" + 2) //A string tem mais prioridade
 
-console.log(meuNome.replace(3, "j"))
+console.log(meuNome.replace("n", "n"))
 
 console.log('Ana,Maria,Pedro'.split(','))
 
