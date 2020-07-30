@@ -12,38 +12,25 @@ Retorno: [3, 7] (Significa que ele bateu três vezes seu recorde de melhor pontu
 aconteceu no sétimo jogo.)
 */
 
-function calculaScore(string) {
-
-    let listaPontos = []
-
-    let listaString = string.split(', ')
-    for(let i in listaString){
-        listaPontos.push(listaString[i])
-    }
-
-    let records = 0
+function avaliaPontuacoes (stringPontuacoes) {
+    let pontuacoes = stringPontuacoes.split(", ")
+    let qtdQuebraDeRecords = 0
     let piorJogo = 1
-    let pontuacaoRecord = 0
-    let piorPontuacao = 0 
+    let maiorPontuacao = pontuacoes[0]
+    let menorPontuacao = pontuacoes[0]
 
-
-    for(i in listaPontos) {
-        if(i == 0) {
-            pontuacaoRecord = listaPontos[i]
-            piorPontuacao = listaPontos[i]
-
-        } else if(piorPontuacao > listaPontos[i]) {
-            piorJogo = i + 1
-            piorPontuacao = listaPontos[i]
-
-        } else if(pontuacaoRecord < listaPontos[i]) {
-            pontuacaoRecord = listaPontos[i]
-            records++
-
+    for (let i = 1; i < pontuacoes.length; i++) {
+        if(pontuacoes[i] > maiorPontuacao) {
+            maiorPontuacao = pontuacoes[i]
+            qtdQuebraDeRecords++
+        }else if (pontuacoes[i] < menorPontuacao) {
+            menorPontuacao = pontuacoes[i]
+            piorJogo = i+1;
         }
     }
-
-    return [records, piorJogo]
+    return [qtdQuebraDeRecords, piorJogo]
 }
+ 
+console.log(avaliaPontuacoes(stringPontuacoes))
 
-console.log(calculaScore("10, 20, 20, 8, 25, 3, 0, 30, 1"))
+let stringPontuacoes = "30, 40, 20, 4, 51, 25, 42, 38, 56, 0"
