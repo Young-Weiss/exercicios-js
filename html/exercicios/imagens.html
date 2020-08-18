@@ -1,0 +1,68 @@
+<div wm-slides>
+    <p>
+        <img src="http://files.cod3r.com.br/curso-web/imagem1.jpg" alt="Muro da Cidade" width="513" height="342" title="Muro da Cidade">
+    </p>
+    
+    <p>
+        <img src="https://i.pinimg.com/originals/90/80/60/9080607321ab98fa3e70dd24b2513a20.gif" alt="GIF de Carregamento">
+    </p>
+    
+    <p class="png">
+        <img src="https://images.vexels.com/media/users/3/126902/isolated/preview/025aa0b9806a698d60dc361fb84fe302-guerra-de-espada-by-vexels.png" alt="espada">
+    </p>
+    
+</div>
+
+<script>
+    function mover(img, inicio, fim, passo, callback) {
+        const novoInicio = inicio - passo
+        if(novoInicio >= fim) {
+            img.style.left = novoInicio + 'px'
+            setTimeout(() => mover(img, novoInicio, fim, passo, callback), 1)
+        } else {
+            callback()
+        }
+    }
+
+    //const p = document.querySelector('[wm-slides] > p')
+    //p.style.display = 'block'
+    //mover(p, 1500, -600, 5, () => {})
+
+    function slider() {
+        const elementos = document.querySelectorAll('[wm-slides] > p')
+        const slides = Array.from(elementos)
+        exibirSlide(slides, slides[0])
+
+        function exibirSlide(slides, slide) {
+            slide.style.display = 'block'
+
+            const inicio = innerWidth
+            const fim = -slide.clientWidth
+
+            slide.style.left = `${inicio}px`
+
+            mover(slide, inicio, fim, 7, () => {
+                slide.style.display = 'none'
+                exibirSlide(slides, getProximo(slides, slide))
+            })
+
+        }
+
+        function getProximo(lista, atual) {
+            const i = lista.indexOf(atual) + 1
+            return i < lista.length ? lista[i] : lista[0]
+        }
+    }
+    slider()
+
+</script>
+
+<style>
+    p {
+        position: absolute;
+        display: none;
+    }
+    .png {
+        background-color: #26f;
+    }
+</style>
